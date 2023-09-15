@@ -20,12 +20,12 @@ function App() {
     const minus = remaining - Credit;
     const hour = hours + Credit;
 
-    if (isExist) {
-      added()
-    } else if (hour > 20) {
+    if (hour > 20) {
       remainingToast()
-    } else if (minus < 0) {
+    } if (minus < 0) {
       totalRemaining()
+    } if (isExist) {
+      added()
     } else {
       setHours(hour);
       setDetails([...details, props]);
