@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-const Course = ({ course }) => {
+const Course = ({ course, handelAddToDetails }) => {
     const { course_img, course_name, title, price, Credit } = course;
-    console.log(course)
     return (
         <div className='bg-[#FFF] p-3 rounded-xl' >
 
@@ -21,16 +20,19 @@ const Course = ({ course }) => {
                     <button><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                         <path d="M12 6.042C10.3516 4.56336 8.2144 3.74694 6 3.75C4.948 3.75 3.938 3.93 3 4.262V18.512C3.96362 18.172 4.97816 17.9989 6 18C8.305 18 10.408 18.867 12 20.292M12 6.042C13.6483 4.56328 15.7856 3.74685 18 3.75C19.052 3.75 20.062 3.93 21 4.262V18.512C20.0364 18.172 19.0218 17.9989 18 18C15.7856 17.9969 13.6484 18.8134 12 20.292M12 6.042V20.292" stroke="#1C1B1B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg></button>
-                    <p className='text-sm font-medium'> Credit:{Credit}</p>
+                    <p className='text-sm font-medium'> Credit:{Credit}hr</p>
                 </div>
             </div>
 
-            <button className='bg-[#2F80ED] w-full h-10 rounded-lg my-3 text-white text-sm font-semibold'>Select</button>
+            <button onClick={() => handelAddToDetails(course, Credit, price)} className='bg-[#2F80ED] w-full h-10 rounded-lg my-3 text-white text-sm font-semibold'>Select</button>
 
         </div>
     );
 };
 Course.propTypes = {
-    course: PropTypes.object
+    course: PropTypes.object,
+    handelAddToDetails: PropTypes.func,
+    handelAddToHours: PropTypes.func,
+
 }
 export default Course;

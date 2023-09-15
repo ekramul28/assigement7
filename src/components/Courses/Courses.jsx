@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Course from "../Course/course";
-// import course from ''
+import PropTypes from 'prop-types';
 
-const Courses = () => {
+const Courses = ({ handelAddToDetails }) => {
     const [courses, setCourses] = useState([]);
     useEffect(() => {
         fetch('course.json')
@@ -10,12 +10,16 @@ const Courses = () => {
             .then(data => setCourses(data))
     }, [])
     return (
-        <div className="w-5/6 grid grid-cols-3 gap-3">
+        <div className="w-3/4 grid grid-cols-3 gap-3">
             {
-                courses.map((course, index) => <Course key={index} course={course}></Course>)
+                courses.map((course, index) => <Course key={index} course={course}
+                    handelAddToDetails={handelAddToDetails}></Course>)
             }
         </div>
     );
 };
-
+Courses.propTypes = {
+    handelAddToDetails: PropTypes.func,
+    handelAddToHours: PropTypes.func
+}
 export default Courses;
