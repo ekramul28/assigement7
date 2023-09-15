@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 const Course = ({ course, handelAddToDetails }) => {
-    const { course_img, course_name, title, price, Credit } = course;
+    const { course_img, course_name, title, price, Credit, id } = course;
     return (
         <div className='bg-[#FFF] p-3 rounded-xl' >
 
@@ -24,7 +24,7 @@ const Course = ({ course, handelAddToDetails }) => {
                 </div>
             </div>
 
-            <button onClick={() => handelAddToDetails(course, Credit, price)} className='bg-[#2F80ED] w-full h-10 rounded-lg my-3 text-white text-sm font-semibold'>Select</button>
+            <button onClick={() => handelAddToDetails(course, Credit, price, id)} className='bg-[#2F80ED] w-full h-10 rounded-lg my-3 text-white text-sm font-semibold'>Select</button>
 
         </div>
     );

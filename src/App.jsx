@@ -9,30 +9,31 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   const remainingToast = () => toast("Credit Hour End You Can't add Course")
   const totalRemaining = () => toast("Total Credit Hours End You Cannot add Course  ")
+  const added = () => toast("alrady addde ")
   const [details, setDetails] = useState([]);
   const [hours, setHours] = useState(0);
   const [price, setPrice] = useState(0);
   const [remaining, setRemaining] = useState(20);
 
-  const handelAddToDetails = (props, Credit, Price) => {
+  const handelAddToDetails = (props, Credit, Price, id) => {
+    const isExist = details.find((item) => item.id == id);
     const minus = remaining - Credit;
     const hour = hours + Credit;
 
-    setPrice(price + Price);
-
-    if (hour > 20) {
+    if (isExist) {
+      added()
+    } else if (hour > 20) {
       remainingToast()
+    } else if (minus < 0) {
+      totalRemaining()
     } else {
       setHours(hour);
       setDetails([...details, props]);
-    }
-
-
-    if (minus < 0) {
-      totalRemaining()
-    } else {
+      setPrice(price + Price);
       setRemaining(minus);
     }
+
+
   }
 
   return (
