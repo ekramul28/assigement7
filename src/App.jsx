@@ -3,17 +3,36 @@ import { useState } from 'react'
 import './App.css'
 import CourseName from './components/CourseName/CourseName'
 import Courses from './components/Courses/Courses'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const remainingToast = () => toast("Credit Hour End You Can't add Course")
+  const totalRemaining = () => toast("Total Credit Hours End You Cannot add Course  ")
   const [details, setDetails] = useState([]);
   const [hours, setHours] = useState(0);
   const [price, setPrice] = useState(0);
-  const [remaining, setRemaining] = useState(20)
+  const [remaining, setRemaining] = useState(20);
+
   const handelAddToDetails = (props, Credit, Price) => {
-    setDetails([...details, props]);
-    setHours(hours + Credit);
+    const minus = remaining - Credit;
+    const hour = hours + Credit;
+
     setPrice(price + Price);
-    setRemaining(remaining - Credit)
+
+    if (hour > 20) {
+      remainingToast()
+    } else {
+      setHours(hour);
+      setDetails([...details, props]);
+    }
+
+
+    if (minus < 0) {
+      totalRemaining()
+    } else {
+      setRemaining(minus);
+    }
   }
 
   return (
@@ -24,6 +43,7 @@ function App() {
           handelAddToDetails={handelAddToDetails}></Courses>
         <CourseName details={details} hours={hours} remaining={remaining}
           price={price}></CourseName>
+        <ToastContainer></ToastContainer>
       </div>
     </div>
   )
